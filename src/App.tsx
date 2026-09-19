@@ -1,17 +1,21 @@
-import { useState } from 'react'
-import { createBrowserRouter, RouterProvider, useParams, useSearchParams, Link, Outlet } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { createBrowserRouter, RouterProvider, useParams, useSearchParams, Link, Outlet, useOutletContext } from 'react-router-dom'
 import './App.css'
+
+
+
+
 
 type Car = { brand: string, model: string };
 
-const cars: Car[] = [
-  { brand: "Renault", model: "Megane" },
-  { brand: "Renault", model: "Scenic" },
-  { brand: "Opel", model: "Corsa E" },
-  { brand: "BMW", model: "X5" },
-];
+// const cars: Car[] = [
+//   { brand: "Renault", model: "Megane" },
+//   { brand: "Renault", model: "Scenic" },
+//   { brand: "Opel", model: "Corsa E" },
+//   { brand: "BMW", model: "X5" },
+// ];
 
-const brands = [...new Set(cars.map(car => car.brand))];
+
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -31,6 +35,45 @@ function App() {
 }
 
 function Cars() {
+
+  const [cars, setCars] = useState<Car[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    
+    async function load() {
+      try {
+        const res = await fetch('https://avans.blob.core.windows.net/cars-api/cars.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        await new Promise(resolve => setTimeout(resolve, 1500)); // TODO: remove - artificial delay to preview the loading skeleton
+        setCars(data);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, []); // lege array = één keer, bij mount
+
+
+  if (error) return <span className="red">Something went wrong!</span>;
+
+  if (loading) {
+    return (
+      <div className="page">
+        <h1>Cars</h1>
+        <BrandNavSkeleton />
+       <Outlet context={{ cars }} />
+      </div>
+    );
+  }
+
+  // Take the brands, deduplicate (Set), and put in a new Array
+  const brands = [...new Set(cars!.map(car => car.brand))];
+
   return (
     <div className="page">
       <h1>Cars</h1>
@@ -41,21 +84,36 @@ function Cars() {
           </li>
         ))}
       </ul>
-      <Outlet />
+      <Outlet context={{ cars }} />
     </div>
   )
 }
 
+function BrandNavSkeleton({ count = 5 }: { count?: number }) {
+  return (
+    <ul className="brand-nav" aria-hidden="true">
+      {Array.from({ length: count }, (_, i) => (
+        <li key={i}>
+          <span className="brand-link skeleton-pill" />
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 function CarsByBrand() {
+
+  const { cars } = useOutletContext<{ cars: Car[] }>();
+
   const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   const model = searchParams.get('model');
-  const carsOfBrand = cars.filter(car =>
+  const carsOfBrand = cars ? cars.filter(car =>
     car.brand.toLowerCase() === slug?.toLowerCase() &&
     (!model || car.model.toLowerCase().includes(model.toLowerCase()))
-  );
+  ) : [];
 
   function toggleFavorite(model: string) {
     setFavorites(current => {
