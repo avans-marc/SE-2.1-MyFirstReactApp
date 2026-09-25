@@ -2,20 +2,7 @@ import { useEffect, useState } from 'react'
 import { createBrowserRouter, RouterProvider, useParams, useSearchParams, Link, Outlet, useOutletContext } from 'react-router-dom'
 import './App.css'
 
-
-
-
-
 type Car = { brand: string, model: string };
-
-// const cars: Car[] = [
-//   { brand: "Renault", model: "Megane" },
-//   { brand: "Renault", model: "Scenic" },
-//   { brand: "Opel", model: "Corsa E" },
-//   { brand: "BMW", model: "X5" },
-// ];
-
-
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
