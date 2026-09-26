@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider, Link, NavLink, Outlet, useParams, useSearchParams } from 'react-router-dom'
-import './App.css'
 
 type Car = { brand: string, model: string };
 
