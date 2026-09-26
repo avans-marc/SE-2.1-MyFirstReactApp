@@ -161,7 +161,7 @@ function Home() {
   return (
     <div className="page page-home">
       <h1>Homepage</h1>
-      <p className="subtitle">A small playground for React Router concepts: nested routes, params, search params and state.</p>
+      <p className="subtitle">A small playground for React.</p>
       <Link className="btn" to="/cars">Cars</Link>
     </div>
   )
