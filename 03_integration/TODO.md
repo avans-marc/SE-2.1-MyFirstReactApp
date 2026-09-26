@@ -37,7 +37,7 @@
 - [ ] Maak in `BrandNav.tsx` een `BrandNavSkeleton`: een paar lege "pillen" met de class `skeleton-pill`.
 - [ ] Maak in `CarList.tsx` een `CarListSkeleton`: een paar lege rijen met de class `skeleton-line`.
 - [ ] Toon ze met `isPending ? <Skeleton /> : <echte inhoud>`.
-- [ ] Voeg de CSS toe: een grijze balk met een bewegende `linear-gradient` (zie `App.css`).
+- [ ] Voeg de CSS toe: een grijze balk met een bewegende `linear-gradient` (zie `index.css`).
 
 > **Waarom dezelfde classes als het echte component?** Dan heeft het skeleton dezelfde vorm en grootte, en verspringt de pagina niet als de data binnenkomt.
 

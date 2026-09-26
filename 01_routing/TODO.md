@@ -8,7 +8,7 @@ Alles gebeurt in deze les in één bestand: `src/App.tsx`.
 ## 1. React Router installeren
 
 - [ ] Installeer de router: `npm install react-router-dom`
-- [ ] Maak `src/App.tsx` leeg, op de import van `App.css` na.
+- [ ] Maak `src/App.tsx` leeg en verwijder `src/App.css`. Alle styling staat in `src/index.css` (die importeert `main.tsx` al).
 
 ## 2. De data
 
