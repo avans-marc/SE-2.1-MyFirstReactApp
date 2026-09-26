@@ -1,6 +1,6 @@
 # Les 03: Integration (TanStack Query)
 
-Onderdeel van **My First React App**. Uitleg over wat je in deze les leert staat in de [README in de hoofdmap](../README.md#les-03-integration-tanstack-query).
+Onderdeel van **My First React App**. Uitleg over wat je in deze les leert staat in de [README in de hoofdmap](../README.md#les-03-integration).
 
 ```bash
 npm install

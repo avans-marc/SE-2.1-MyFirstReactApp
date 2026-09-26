@@ -1,6 +1,6 @@
 # Les 04: Forms (TanStack Form)
 
-Onderdeel van **My First React App**. Uitleg over wat je in deze les leert staat in de [README in de hoofdmap](../README.md#les-04-forms-tanstack-form).
+Onderdeel van **My First React App**. Uitleg over wat je in deze les leert staat in de [README in de hoofdmap](../README.md#les-04-forms).
 
 ```bash
 npm install
