@@ -1,4 +1,4 @@
-import { carId, type Car } from "../api/cars";
+import { carId, type Car } from "../api/handcoded/cars";
 import { FavoriteButton } from "./FavoriteButton";
 
 type CarListProps = {

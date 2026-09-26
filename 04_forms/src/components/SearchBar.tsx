@@ -14,7 +14,15 @@ export function SearchBar({ onSearch }: SearchBarProps) {
 
   return (
     <form className="search-bar" role="search" onSubmit={(e) => { e.preventDefault(); form.handleSubmit(); }}>
-      <form.Field name="query">
+      <form.Field
+        name="query"
+        listeners={{
+          // Search while typing, but only once the user pauses for 250ms:
+          // otherwise every keystroke would start a new fetch
+          onChange: ({ value }) => onSearch(value),
+          onChangeDebounceMs: 250,
+        }}
+      >
         {(field) => (
           <input
             className="search-input"
